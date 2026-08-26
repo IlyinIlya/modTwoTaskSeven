@@ -64,7 +64,7 @@ public class App {
         //Checking for empty list
 
         if (basketNoItemsRemove.isEmpty()) {
-            System.out.println("Список пуст: '" + productName + "' не в списке" );
+            System.out.println("Список пуст: '" + productName + "' не в списке");
         }
 
         //Printing basket
@@ -103,22 +103,22 @@ public class App {
         searchEngine.add(article3);
         searchEngine.add(article4);
 
-        Map <String, Searchable> result1 = searchEngine.search("футболка");
+        Map<String, Searchable> result1 = searchEngine.search("футболка");
         System.out.println("\nПо запросу 'футболка' найдено:");
         for (Searchable resault : result1.values()) {
-                System.out.println(resault.getStringRepresentation());
+            System.out.println(resault.getStringRepresentation());
         }
 
-        Map <String, Searchable> result2 = searchEngine.search("Шорты");
+        Map<String, Searchable> result2 = searchEngine.search("Шорты");
         System.out.println("\nПо запроссу 'Шорты' найдено:");
         for (Searchable resault : result2.values()) {
-                System.out.println(resault.getStringRepresentation());
+            System.out.println(resault.getStringRepresentation());
         }
 
-        Map <String, Searchable> result3 = searchEngine.search("рубашка");
+        Map<String, Searchable> result3 = searchEngine.search("рубашка");
         System.out.println("\nПо запроссу 'рубашка' найдено:");
         for (Searchable resault : result3.values()) {
-                System.out.println(resault.getStringRepresentation());
+            System.out.println(resault.getStringRepresentation());
         }
         System.out.println("=================================================");
         try {
