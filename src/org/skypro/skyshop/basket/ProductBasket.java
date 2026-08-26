@@ -6,19 +6,22 @@ import java.util.*;
 
 public class ProductBasket {
     // Basket contains a list of products
-    private final Map<String, List <Product>> products = new HashMap<>();
+    private final Map<String, List<Product>> products = new HashMap<>();
 
     //Method for adding a product to the basket
     public void addProduct(Product product) {
         String nameProduct = product.getName();
+        products.computeIfAbsent(nameProduct, k -> new ArrayList<>()).add(product);
     }
 
     //Method for obtaining the total basket cost
     public int getTotalBasketCost() {
         int totalCost = 0;
-        for (Product product : products) {
-            if (product != null) {
-                totalCost += product.getPrice();
+        for (List<Product> listProduct : products.values()) {
+            for (Product product : listProduct) {
+                if (product != null) {
+                    totalCost += product.getPrice();
+                }
             }
         }
         return totalCost;
@@ -27,9 +30,11 @@ public class ProductBasket {
     //Method counts special products
     public int countSpecialProducts() {
         int iCount = 0;
-        for (Product product : products) {
-            if (product != null && product.isSpecial()) {
-                iCount++;
+        for (List<Product> listProduct : products.values()) {
+            for (Product product : listProduct) {
+                if (product != null && product.isSpecial()) {
+                    iCount++;
+                }
             }
         }
         return iCount;
@@ -38,11 +43,12 @@ public class ProductBasket {
     //Method prints the basket contents
     public void printBasketContents() {
         boolean emptybasket = true;
-        for (Product product : products) {
-            if (product != null) {
-                System.out.println(product.toString());
-                emptybasket = false;
-
+        for (List<Product> listProduct : products.values()) {
+            for (Product product : listProduct) {
+                if (product != null) {
+                    System.out.println(product.toString());
+                    emptybasket = false;
+                }
             }
         }
         if (emptybasket) {
@@ -56,12 +62,7 @@ public class ProductBasket {
 
     //Method for checking a product in the basket by name
     public boolean checkProductName(String productName) {
-        for (Product product : products) {
-            if (product != null && product.getName().equals(productName)) {
-                return true;
-            }
-        }
-        return false;
+        return products.containsKey(productName);
     }
 
     //Method for clearing the basket
@@ -69,16 +70,11 @@ public class ProductBasket {
         products.clear();
     }
 
-    public List <Product> basketRemoveProductByName (String name) {
-        List <Product> basketItemsRemove = new LinkedList<>();
-        Iterator<Product> iterator = products.iterator();
+    public List<Product> basketRemoveProductByName(String name) {
+        List<Product> basketItemsRemove = products.remove(name);
 
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product != null && product.getName().equals(name)) {
-                basketItemsRemove.add(product);
-                iterator.remove();
-            }
+        if (basketItemsRemove == null) {
+            return new ArrayList<>();
         }
         return basketItemsRemove;
     }
