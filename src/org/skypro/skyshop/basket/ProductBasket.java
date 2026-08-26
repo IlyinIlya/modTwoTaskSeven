@@ -2,17 +2,15 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ProductBasket {
     // Basket contains a list of products
-    private final List<Product> products = new LinkedList<>();
+    private final Map<String, List <Product>> products = new HashMap<>();
 
     //Method for adding a product to the basket
     public void addProduct(Product product) {
-        products.add(product);
+        String nameProduct = product.getName();
     }
 
     //Method for obtaining the total basket cost
